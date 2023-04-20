@@ -2,7 +2,7 @@
 
 
 {% block body %}
-Profile Photo: <img src="{{photo.image.url}}"><br>
+Profile Photo: <img style="width:120px;" src="{{photo.image.url}}"><br>
 
 Username: {{info.username}}<br>
 First Name: {{info.first_name}}<br>
@@ -12,5 +12,8 @@ Email: {{info.email}}<br>
 Address:  {{info.address}}<br>
 Designation:  {{info.designation}}<br>
 Email: {{info.email}}<br>
+
+
+<a href="{% url 'logout' %}"><button type="button" class="btn btn-primary">Logout</button></a>
 
 {% endblock body %}

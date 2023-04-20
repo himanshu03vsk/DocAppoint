@@ -1,13 +1,19 @@
 {% extends 'base.html' %}
 
-
-
-
 {% block body %}
-
-
+<div style="text-align: center;">
+    <div style="width: 500px; margin: 0 auto;">
+<br>
 <form method="POST">
     {% csrf_token %}
     {{form.as_p}}
-    <input type="submit" value="Login"/>
+    <button class="btn btn-primary" type="submit">Login</button> or 
+    <a href="{% url 'signup' %}"><button type="button" class="btn btn-primary">Register</button></a>
+</form>
+
+    </div>
+  </div>
+
+
+    {% comment %} <input type="submit" value="Login"/> {% endcomment %}
 {% endblock body %}

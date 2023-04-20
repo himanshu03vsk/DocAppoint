@@ -2,9 +2,17 @@
 
 
 {% block body %}
+<div style="text-align: left; ">
+    <div style="width: 500px;padding-left:10px; border: solid 4px #000; margin: 0 auto;">
+        <br>
+        <br>
+
 <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {{form.as_p}}
     {{image_form.as_p}}
-    <input type="submit" value="Register"/>
+    <button class="btn btn-primary" type="submit">Register</button><br><br>
+</div>
+</div>
+
 {% endblock body %}

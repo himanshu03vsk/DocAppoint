@@ -11,6 +11,12 @@ from .models import *
 
 login_url = '/login'
 
+@login_required(login_url=login_url)
+def home(request):
+	if request.user.designation == "doctor":
+		return redirect("doctor_dashboard")
+	return redirect("patient_dashboard")
+
 
 def signup(request):
 	if request.method == "POST":
