@@ -25,7 +25,7 @@ class Blog(models.Model):
     publisher           = models.ForeignKey(People, on_delete=models.CASCADE)
     title               = models.CharField(max_length=255)
     category            = models.CharField(max_length=100, choices=CATEGORY_CHOICES)
-    summary             = models.CharField(max_length=30)
+    summary             = models.CharField(max_length=255)
     content             = models.TextField(default="Some Content")
     draft               = models.BooleanField(default=False)
     

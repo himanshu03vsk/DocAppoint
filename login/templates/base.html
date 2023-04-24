@@ -52,7 +52,6 @@
   {% if request.user.is_authenticated %}
     <nav class="navbar px-2 navbar-light bg-light navbar-expand-lg bg-body-tertiary">
       <a class="navbar-brand " href="{% url 'home' %}">
-        <img src="{% static 'img/logo.png' %}" width="30" height="30" class="d-inline-block align-top" alt="">
         Application Hospital Django 
       </a>
 
@@ -81,10 +80,10 @@
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item dropdown">
               <a class="nav-link dropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="{% static 'img/avatar.png' %}" width="40" height="40" class="d-inline-block align-top" alt="">
+              <b> Hi {{request.user.first_name}} </b>
               </a>
               <ul class="dropdown-menu">
-                <li><p>Hi {{request.user.first_name}}!</p></li>
+                <li><a class="dropdown-item" href="{% url 'patient_dashboard' %}">Profile</a></li>
 
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
