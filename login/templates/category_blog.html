@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+
+    {% for blog in blog_set.values %}
+        <div style="padding-left:1%; margin:5px; border: solid 4px #000; border-radius:12px;" id='blog-{{blog.blog_id}}'>
+    {% comment %} {{blog.1.image.url}} {% endcomment %}
+        <h4>Title: {{blog.0.title}}
+        <p><b>summary: </b>{{blog.0.summary|truncatechars:15}}
+        <br>
+    Image: <img style="width:120px;" src="{{blog.1.image.url}}"><br>
+    <a href="{% url 'view_ex_blog' blog.0.id %}"><button type="button" class="btn btn-primary">View Blog </button></a>
+
+    
+</div>
+{% endfor %}    
+
+{% endblock body %}

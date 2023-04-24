@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+<br>
+<br>
+
+<div id='edit-draft-form'>
+    <form method="POST" action='{% url "save_draft" blog_id  %}' enctype="multipart/form-data">
+        {% csrf_token %}
+    {{form1.as_p}}
+    {{form2.as_p}}
+    <input class="btn btn-primary" type="submit" name="action" value="Edit Draft" />
+
+{% endblock body %}
+
+
+{% block javascript %}
+<script>
+
+    $(document).ready(function(){
+
+        $("#image-clear_id").remove();
+        $("label[for='image-clear_id']").remove();
+     })
+
+</script>
+{% endblock javascript %}
+

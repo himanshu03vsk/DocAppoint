@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+<br>
+<br>
+
+<div id='new-blog-form'>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+    {{form1.as_p}}
+    {{form2.as_p}}
+    <input class="btn btn-primary" type="submit" name="action" value="Draft" /> or
+    <input type="submit" class="btn btn-primary" name="action" value="Upload" />
+
+{% endblock body %}

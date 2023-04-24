@@ -4,8 +4,10 @@ from django.contrib import admin
 
 
 # from django.c/ontrib import admin
-from .models import People, PeoplePhoto
+from .models import People, PeoplePhoto,Blog, BlogImage
 
 # Register your models here.
 admin.site.register(People)
 admin.site.register(PeoplePhoto)
+admin.site.register(BlogImage)
+admin.site.register(Blog)

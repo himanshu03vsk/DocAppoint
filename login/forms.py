@@ -2,7 +2,7 @@ import sys
 sys.path.append("..")
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from. models import People, PeoplePhoto
+from. models import People, PeoplePhoto, Blog, BlogImage
 
 CHOICES = (("patient", "Patient"), ("doctor", "Doctor"))
 
@@ -30,4 +30,21 @@ class ProfileImageForm(forms.ModelForm):
         widgets = {
             'image': forms.ClearableFileInput(attrs={'class':'form-control', 'required': ''}),
         }
+
+
+
+class BlogImageForm(forms.ModelForm):
+
+    class Meta:
+        model = BlogImage
+        fields = ['image']
+        widgets = {
+            'image': forms.ClearableFileInput(attrs={'class':'form-control'}),
+        }
+
+class BlogForm(forms.ModelForm):
+    class Meta:
+        model = Blog
+        exclude = ['draft', 'publisher']
+
 

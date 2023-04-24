@@ -19,8 +19,19 @@ class People(AbstractUser):
     def __str__(self):
         return self.username
     
-
+CATEGORY_CHOICES = (("mental health", "Mental Health"), ("heart disease", "Heart Disease"), ("covid19", "COVID-19"), ("immunization", "Immunization"))
+class Blog(models.Model):
+    id                  = models.AutoField(primary_key=True)
+    publisher           = models.ForeignKey(People, on_delete=models.CASCADE)
+    title               = models.CharField(max_length=255)
+    category            = models.CharField(max_length=100, choices=CATEGORY_CHOICES)
+    summary             = models.CharField(max_length=30)
+    content             = models.TextField(default="Some Content")
+    draft               = models.BooleanField(default=False)
     
+
+    def __str__(self):
+        return self.title
 class PeoplePhoto(models.Model):
     people_id          = models.ForeignKey(People, on_delete=models.CASCADE, blank=True)
     image              = models.ImageField(upload_to='images/', verbose_name="image", null=True, blank=True)
@@ -29,4 +40,13 @@ class PeoplePhoto(models.Model):
     def __str__(self) -> str:
         return self.people_id.username
     
+
+class BlogImage(models.Model):
+    blog_id             = models.ForeignKey(Blog, on_delete=models.CASCADE)
+    image               = models.ImageField(upload_to='blog_images', verbose_name="Blog Image", null=True, blank=True)
+
+
+# Mental Health, Heart Disease, Covid19, Immunization
+
+
 
