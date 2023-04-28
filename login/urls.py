@@ -15,6 +15,11 @@ urlpatterns = [
     path('doctor/drafts', views.view_drafts, name="view_drafts"),
     path('doctor/edit_draft/<int:blog_id>', views.edit_draft, name="edit_draft"),
     path('categories/<str:category>', views.view_category_blogs, name="view_category_blogs"),
+    path('view_doctors', views.view_doctors, name="view_doctors"),
+    path('book_appointment/<int:doc_id>', views.book_appointment, name="book_appointment"),
+    path('view_appointments', views.view_appointments, name="view_appointments"),
+    path('auth/gacc', views.authorize_gacc, name="authorize_gacc"),
+
 
 
 

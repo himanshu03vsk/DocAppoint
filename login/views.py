@@ -1,13 +1,22 @@
 from django.shortcuts import render, redirect
-from .forms import PeopleForm, ProfileImageForm, BlogForm, BlogImageForm
+from .forms import PeopleForm, ProfileImageForm, BlogForm, BlogImageForm, AppointmentForm
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm #add this
-
-
+from datetime import datetime, timedelta
+from .helper import create_appointment, authorize
 # Create your views here.
 from .models import *
+
+
+
+
+
+
+
+
+
 
 
 
@@ -199,8 +208,56 @@ def view_drafts(request):
 		blog_set[i.id] = [i, i.blogimage_set.all()[0]]
 	return render(request, "view_drafts.html", {"blog_set": blog_set})
 
+@login_required(login_url=login_url)
+def view_doctors(request):
+	doctors = People.objects.filter(designation="doctor")
+	return render(request, 'view_doctors.html', {'doctors': doctors})
 
+@login_required(login_url=login_url)
+def book_appointment(request, doc_id):
+	if request.method=="POST":
+		print(request.POST)
+		start = datetime.strptime(request.POST['start_time'], '%Y-%m-%dT%H:%M')
+		end_time = start + timedelta(minutes=45)
+		# print(end)
+		form1 = AppointmentForm(request.POST)
+		start = start.isoformat() + '+05:30'
+		end = end_time.isoformat() + '+05:30'
 
+		# end_time = request.POST
+		if form1.is_valid():
+			form = form1.save(commit=False)
+			form.patient_id = request.user.id
+			print(request.user.id)
+			form.doctor_id = People.objects.get(pk=doc_id)
+			form.end_time = end_time
+			form.save()
+			a = create_appointment(f'Appointment with patient {request.user.first_name}', start, end, f"Meet with {request.user.first_name} about {form.speciality}", form.doctor_id.id)
+		return render(request, 'success.html', {'data': form})
+	
+
+	#GET 
+	form1 = AppointmentForm()
+	return render(request, "book_appointment.html", {"form1":form1})
+
+@login_required(login_url=login_url)
+def view_appointments(request):
+	appointments = Appointment.objects.filter(doctor_id = request.user.id, start_time__gt=datetime.now()).order_by('start_time')
+	print(appointments)
+	return render(request, 'view_appointments.html', {"appointments": appointments})
+
+@login_required(login_url=login_url)
+def authorize_gacc(request):
+	id = request.user.id
+	if request.user.designation == 'doctor':
+		code = authorize(id)
+		if code == 1:
+			message = 'Alread authorized'
+		elif code == 0:
+			message = 'Auth Successfull'
+		else:
+			message = "Some error occurred"
+	return render(request, 'auth.html', {'message': message})
 
 @login_required(login_url=login_url)
 def view_blogs(request):

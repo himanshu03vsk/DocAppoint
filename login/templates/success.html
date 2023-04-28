@@ -1,0 +1,24 @@
+{% extends 'base.html' %}   
+
+
+{% block body %}
+<div style="padding:8px; margin:8px;">
+<div class="alert alert-success" role="alert">
+    Your appointment with Dr {{data.doctor_id.first_name}} has been confirmed!
+  </div>
+
+  <div class="card text-white bg-success mb-3" style="max-width: 30%;">
+    <div class="card-header">Booking Details</div>
+    <div class="card-body">
+      <h5 class="card-title">Appointment with Dr {{data.doctor_id.first_name}}</h5><br>
+      <hr>
+      <p class="card-text">Appointment starts at: {{data.start_time}}</p>
+      <p class="card-text">Appointment ends at: {{data.end_time}}</p>
+
+    </div>
+</div>
+
+
+
+
+{% endblock body %}

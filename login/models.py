@@ -46,7 +46,13 @@ class BlogImage(models.Model):
     image               = models.ImageField(upload_to='blog_images', verbose_name="Blog Image", null=True, blank=True)
 
 
-# Mental Health, Heart Disease, Covid19, Immunization
+class Appointment(models.Model):
+    id                  = models.AutoField(primary_key=True)
+    doctor_id           = models.ForeignKey(People, on_delete=models.CASCADE, related_name="doctor_id_ref")
+    patient             = models.ForeignKey(People, on_delete=models.CASCADE, related_name="patient_id_ref")
+    speciality          = models.CharField(verbose_name= "Required Speciality",max_length=30 ,choices=CATEGORY_CHOICES)
+    start_time          = models.DateTimeField(verbose_name="Appointment Time" ,null=True, blank=True)
+    end_time            = models.DateTimeField(null=True, blank=True)
 
 
 

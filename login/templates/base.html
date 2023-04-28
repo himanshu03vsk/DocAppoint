@@ -59,7 +59,10 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
          
          {% if request.user.designation == "doctor" %}
-          
+         <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'view_appointments' %}">Appointments with patients <span class="sr-only"></span></a>          
+          </li>  
           
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
@@ -75,7 +78,13 @@
             </li>
 
           </ul>
+         {% else %}
+         <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'view_doctors' %}">View Doctors <span class="sr-only"></span></a>          
+          </li>
          {% endif %}
+
 
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item dropdown">

@@ -2,7 +2,8 @@ import sys
 sys.path.append("..")
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from. models import People, PeoplePhoto, Blog, BlogImage
+from. models import People, PeoplePhoto, Blog, BlogImage, Appointment
+from datetime import datetime, timedelta
 
 CHOICES = (("patient", "Patient"), ("doctor", "Doctor"))
 
@@ -48,3 +49,8 @@ class BlogForm(forms.ModelForm):
         exclude = ['draft', 'publisher']
 
 
+class AppointmentForm(forms.ModelForm):
+    class Meta:
+        model = Appointment
+        fields = ['start_time', 'speciality']
+        widgets = {'start_time': forms.TextInput(attrs={'type': 'datetime-local', 'min': f"{str(datetime.today())[:-10]}"})}

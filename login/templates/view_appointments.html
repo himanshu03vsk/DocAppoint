@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+
+
+{% for appointment in appointments %}
+<div style="padding:8px; margin:8px;">
+    
+      <div class="card text-white bg-success mb-3" style="max-width: 30%;">
+        <div class="card-header">Appointment Details</div>
+        <div class="card-body">
+          <h5 class="card-title">Appointment with patient {{appointment.patient.first_name}} {{appointment.patient.last_name}}</h5><br>
+          <hr>
+          <p class="card-text">Appointment starts at: {{appointment.start_time}}</p>
+          <p class="card-text">Appointment ends at: {{appointment.end_time}}</p>
+    
+        </div>
+    </div>
+        
+    {% endfor %}
+
+
+{% endblock body %}

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+
+
+{% block body %}
+    {% for doctor in doctors %}
+    <div style="margin:8px; padding:8px; border: solid 3px #000; width:50%; border-radius:10px;">
+        <div class='doctor-{{doctor.id}}' style="display:flex; padding:8px; margin-left:4px; ">
+            <img style="width:120px; padding:2px;" src="{{doctor.peoplephoto_set.all.0.image.url}}"><br>
+            <p>Name: Dr. {{doctor.first_name}} {{doctor.last_name}}</p>
+        </div>
+            <a href="{% url 'book_appointment' doctor.id %}"><button type="button" class="btn btn-primary">Book Appointment</button></a>
+    </div>
+
+        
+        
+    {% endfor %}
+
+{% endblock body %}
